@@ -13,13 +13,12 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
+  - _ALPHATEST_ON
   - _ENVIRONMENTREFLECTIONS_OFF
   - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords:
-  - _ALPHABLEND_ON
-  - _GLOSSYREFLECTIONS_OFF
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
@@ -89,15 +88,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaToMask: 0
     - _Blend: 0
+    - _BlendFactor: 2
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _Cutoff: 0
+    - _Cutoff: 0.07
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
@@ -109,6 +109,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0
@@ -122,6 +123,12 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 0.05}
     - _Color: {r: 0.01886791, g: 0.01886791, b: 0.01886791, a: 0.05}
+    - _Color0: {r: 0, g: 0, b: 1, a: 0.09803922}
+    - _Color1: {r: 0, g: 1, b: 1, a: 0.09803922}
+    - _Color2: {r: 0, g: 1, b: 0, a: 0.07058824}
+    - _Color3: {r: 1, g: 1, b: 0, a: 0.07058824}
+    - _Color4: {r: 1, g: 0.25098038, b: 0, a: 0.07058824}
+    - _Color5: {r: 1, g: 0, b: 0, a: 0.07058824}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
