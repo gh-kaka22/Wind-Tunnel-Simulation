@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: DamascusUniversity
   productName: VR Gas Simulation
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -288,7 +288,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 4539e009d5899d2479e0f3bbc0b43b02, type: 3}
+      m_Icon: {fileID: 2800000, guid: d22de2bf74fa3ed4eb3a02b91ba9929d, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

@@ -3,12 +3,7 @@ guid: c8f45062a5ae0a54ebd2c0b523e73e0b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - redMaterial: {instanceID: 0}
-  - blueMaterial: {instanceID: 0}
-  - blackMaterial: {fileID: -876546973899608171, guid: ad94a020d6c5dec4bae67feba301a7d3,
-      type: 3}
-  - latticeScript: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

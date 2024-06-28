@@ -13,7 +13,6 @@ public class WindTunnelDistortion : MonoBehaviour
     private Vector3[] initialVertices;
     private Vector3[] currentVertices;
     private Vector3[] vertexVelocities;
-    private float maxDistortionStrength;
 
     private void Awake()
     {

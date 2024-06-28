@@ -14,7 +14,6 @@ public class NewBehaviourScript : MonoBehaviour
     public bool[,,] barriers;
     public Material redMaterial, blueMaterial, blackMaterial;
     public NewLatticeScript latticeScript;
-    bool isBariers = false;
     public Slider change;
     public Color[] color_map;
     [SerializeField] private InputField speedInputField;
@@ -42,10 +41,59 @@ public class NewBehaviourScript : MonoBehaviour
     public Balloon balloon;
     public int particlesType = 0;
     public int coloringType = 0;
+    private List<Fan> fans = new List<Fan>();
+    public GameObject tracer;
 
-
+    private int frames = 0;
+    private WindTunnelDistortion distoration;
     // Applies the viscosity setting based on the dropdown selection
 
+
+    void Start()
+    {
+        grid = new Cell[mxdim, mydim, mzdim];
+        barriers = new bool[mxdim, mydim, mzdim];
+        latticeScript.InitializeArrays(mxdim, mydim, mzdim);
+        tunnelScript = FindObjectOfType<Tunnle>();
+        //balloon = FindObjectOfType<Balloon>();
+        
+
+        //cellMaterials = new Material[1];  
+        setColorMaps(0.1f);
+        applyButton.onClick.AddListener(ApplyAllSettings);
+        applyButton.onClick.AddListener(ToggleSimulation);
+        resetButton.onClick.AddListener(resetSimulation); // Add this line
+        //latticeScript.InitBarriers(barriers); 
+    }
+
+
+    void Update()
+    {
+
+        // lattic.Collide(); 
+        // lattic.Stream();
+
+        // Debug.Log(latticeScript.speed2[13,13,10]);
+        frames++;
+
+
+        if (frames % change.value == 0)
+        {
+            if (isSimulationActive)
+            {
+                latticeScript.simulate();
+                UpdateColors();
+                convertVerticesToBarriers();
+                // UpdateTracerArrowsLine();
+                UpdateTracers();
+                latticeScript.InitBarriers(barriers);
+                HandleCollisionsAndDeformations();
+
+                // balloon.ApplyDistortion(new Vector3((float)latticeScript.fx, (float)latticeScript.fy, (float)latticeScript.fz));
+            }
+
+        }
+    }
 
     public void ApplyAllSettings()
     {
@@ -123,6 +171,7 @@ public class NewBehaviourScript : MonoBehaviour
         string selectedOption = viscosityDropdown.options[viscosityDropdown.value].text;
         switch (selectedOption)
         {
+            case "Gas Type" :
             case "O2":
                 latticeScript.initViscosity = 0.0171f;
                 break;
@@ -333,7 +382,6 @@ public class NewBehaviourScript : MonoBehaviour
 
     public void InitBarriers()
     {
-        isBariers = true;
         for (int x = 0; x < xdim; x++)
         {
             for (int y = 0; y < ydim; y++)
@@ -354,7 +402,6 @@ public class NewBehaviourScript : MonoBehaviour
     public void eraseBarriers()
     {
         // Debug.Log(xdim + "   " + ydim + "   " + zdim);
-        isBariers = false;
         for (int x = 0; x < xdim; x++)
         {
             for (int y = 0; y < ydim; y++)
@@ -459,53 +506,6 @@ public class NewBehaviourScript : MonoBehaviour
         grid[x, y, z].material.color = color_map[color_idx];
     }
 
-    void Start()
-    {
-        grid = new Cell[mxdim, mydim, mzdim];
-        barriers = new bool[mxdim, mydim, mzdim];
-        latticeScript.InitializeArrays(mxdim, mydim, mzdim);
-        tunnelScript = FindObjectOfType<Tunnle>();
-        balloon = FindObjectOfType<Balloon>();
-
-        //cellMaterials = new Material[1];  
-        setColorMaps(0.1f);
-        applyButton.onClick.AddListener(ApplyAllSettings);
-        applyButton.onClick.AddListener(ToggleSimulation);
-        resetButton.onClick.AddListener(resetSimulation); // Add this line
-        //latticeScript.InitBarriers(barriers); 
-    }
-
-    private int frames = 0;
-    private WindTunnelDistortion distoration;
-    void Update()
-    {
-
-        // lattic.Collide(); 
-        // lattic.Stream();
-
-        // Debug.Log(latticeScript.speed2[13,13,10]);
-        frames++;
-
-
-        if (frames % change.value == 0)
-        {
-            if (isSimulationActive)
-            {
-                latticeScript.simulate();
-                UpdateColors();
-                convertVerticesToBarriers();
-                // UpdateTracerArrowsLine();
-                UpdateTracers();
-                latticeScript.InitBarriers(barriers);
-                HandleCollisionsAndDeformations();
-
-                // balloon.ApplyDistortion(new Vector3((float)latticeScript.fx, (float)latticeScript.fy, (float)latticeScript.fz));
-            }
-
-        }
-    }
-
-    private List<Fan> fans = new List<Fan>();
 
     private void HandleCollisionsAndDeformations()
     {
@@ -602,7 +602,6 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    public GameObject tracer;
     private void InitializeTracers()
     {
         for (int i = 0; i < 1000; i++) // Create 100 tracers for example
